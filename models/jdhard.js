@@ -21,4 +21,4 @@ const jdSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("JD", jdSchema);
+export default mongoose.model("JDHard", jdSchema);

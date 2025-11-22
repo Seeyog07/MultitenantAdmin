@@ -5,7 +5,7 @@ import User from '../models/User.js';
 import generatePassword from '../utils/generatePassword.js';
 import sendEmail from '../utils/sendEmail.js';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import JD from '../models/jd.js';
+import JD from '../models/jdhard.js';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
