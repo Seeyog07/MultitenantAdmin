@@ -1,7 +1,7 @@
 import express from "express";
 import {protect} from "../middlewares/auth.js";
 import { authorize } from '../middlewares/roles.js';
-import { createJD, createJDWithAI, getAllJds, getAllCandidates, addresumeToJD, getAllCandidatesAppliedToJD  } from "../controllers/jdController.js";
+import { createJD, createJDWithAI, getAllJds, getAllCandidates, addresumeToJD, getAllCandidatesAppliedToJD, getAssignedJDsByRMG  } from "../controllers/jdController.js";
 import { filterResumes } from "../controllers/aiResumeFilterController.js";
 
 const router = express.Router();
@@ -16,5 +16,6 @@ router.get("/all-jd", protect, authorize("HR", "Candidate"), getAllJds);
 router.get("/all-candidates", protect, authorize("HR"), getAllCandidates);
 router.post("/:jdId/add-resume", protect, authorize("HR"), addresumeToJD);
 router.get("/:jdId/candidates", protect, authorize("HR"), getAllCandidatesAppliedToJD);
+router.get("/assigned-jds/hr", protect, authorize("HR"), getAssignedJDsByRMG);
 
 export default router;
