@@ -90,7 +90,7 @@ export const getAppliedJobs = asyncHandler(async (req, res, next) => {
 function sendTokenResponse(candidate, statusCode, res) {
   const payload = { id: candidate._id, role: "Candidate" };
   const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpire });
-  res.status(statusCode).json({ success: true, token });
+  res.status(statusCode).json({ success: true, token, candidate });
 }
 
 export const getAllCandidates = asyncHandler(async (req, res, next) => {
@@ -247,6 +247,17 @@ export const showlatestFiveJdsForCandidate = asyncHandler(async (req, res, next)
   }
 });
 
+export const getAppliedjd = asyncHandler(async (req, res, next) => {
+  try {
+    const candidateId = req.candidate._id;
+    const jds = await JD.find({ "appliedCandidates.candidate": candidateId });
+    res.status(200).json({ success: true, data: jds });
+  } catch (err) {
+    return next(
+      new errorResponse(err.message || "Failed to fetch applied JDs", 500)
+    );
+  }
+});
 
 // export const getlatestJdsForCandidate = asyncHandler(async (req, res, next) => {
 //   try {

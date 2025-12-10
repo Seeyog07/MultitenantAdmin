@@ -1,5 +1,5 @@
 import express from "express";
-import { registerCandidate, loginCandidate, applyJob, getAppliedJobs, getCandidateJdCounts, showlatestFiveJdsForCandidate} from "../controllers/candidateController.js";
+import { registerCandidate, loginCandidate, applyJob, getAppliedJobs, getCandidateJdCounts, showlatestFiveJdsForCandidate, getAppliedjd} from "../controllers/candidateController.js";
 import { protect } from "../middlewares/auth.js";
 import { protectCandidate } from "../middlewares/authCandidate.js";
 import multer from "multer";
@@ -13,6 +13,7 @@ router.post("/apply/:jdId", upload.single("resume"), applyJob);
 router.get("/applied-jobs", protectCandidate, getAppliedJobs);
 router.get("/jd-counts", protectCandidate, getCandidateJdCounts);
 router.get("/latest-five-jds", protectCandidate, showlatestFiveJdsForCandidate);
+router.get("/applied-jds", protectCandidate, getAppliedjd);
 
 
 export default router;
