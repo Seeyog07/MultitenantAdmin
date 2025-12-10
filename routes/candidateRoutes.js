@@ -1,5 +1,6 @@
 import express from "express";
 import { registerCandidate, loginCandidate, applyJob, getAppliedJobs, getCandidateJdCounts, showlatestFiveJdsForCandidate, getAppliedjd} from "../controllers/candidateController.js";
+// import { registerCandidate, loginCandidate, applyJob, getAppliedJobs} from "../controllers/candidateController.js";
 import { protect } from "../middlewares/auth.js";
 import { protectCandidate } from "../middlewares/authCandidate.js";
 import multer from "multer";

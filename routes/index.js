@@ -9,6 +9,7 @@ import jdRoutes from "./jdRoutes.js"
 import publicJDRoutes from "./publicJDRoutes.js"
 import candidateRoutes from './candidateRoutes.js';
 import dashboardRoutes from './dashboardRoutes.js';
+import assesmentRoutes from './assessmentRoutes.js';
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ router.use('/jd', jdRoutes);
 router.use('/', publicJDRoutes);
 router.use('/candidate', candidateRoutes);
 router.use('/dashboard', dashboardRoutes);
+router.use('/finalise',assesmentRoutes);
 
 // add other routes: /users, /jobs, etc.
 

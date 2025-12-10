@@ -27,10 +27,21 @@ export const registerCandidate = asyncHandler(async (req, res, next) => {
 export const loginCandidate = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) return next(new errorResponse("Email and password required", 400));
-  const candidate = await Candidate.findOne({ email }).select("+password");
+  let candidate = await Candidate.findOne({ email }).select("+password");
   if (!candidate) return next(new errorResponse("Invalid credentials", 401));
   const isMatch = await candidate.matchPassword(password);
   if (!isMatch) return next(new errorResponse("Invalid credentials", 401));
+
+  // Set hasLoggedIn to true on first login
+  if (!candidate.hasLoggedIn) {
+    candidate.hasLoggedIn = true;
+    await candidate.save();
+  }
+
+  // Print all candidates in the table to the console
+  const allCandidates = await Candidate.find();
+  console.log('All candidates:', allCandidates);
+
   sendTokenResponse(candidate, 200, res);
 });
 

@@ -162,6 +162,17 @@ export const getAllCandidates = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, count: Candidate.length, data: Candidate });
 });
 
+// Get only filtered candidates for a JD
+export const getFilteredCandidatesForJD = asyncHandler(async (req, res, next) => {
+  const { jdId } = req.params;
+  const jd = await JD.findById(jdId).populate('filteredCandidates.candidate', 'name email phone resume');
+  if (!jd) return next(new ErrorResponse("JD not found", 404));
+  res.status(200).json({
+    success: true,
+    count: jd.filteredCandidates.length,
+    data: jd.filteredCandidates
+  });
+});
 
 export const getAllCandidatesAppliedToJD = asyncHandler(async (req, res, next) => {
   const { jdId } = req.params;

@@ -9,6 +9,8 @@ import routes from './routes/index.js';
 import errorHandler from './middlewares/errorHandler.js';
 import { config } from './config/index.js';
 
+import assessmentRoutes from './routes/assessmentRoutes.js';
+
 const app = express();
 
 // Middlewares
@@ -33,6 +35,9 @@ app.use(limiter);
 
 // Routes
 app.use('/api', routes);
+
+// Assessment routes
+app.use('/api/assessment', assessmentRoutes);
 
 // 404 handler
 app.use((req, res, next) => {
